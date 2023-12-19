@@ -1,4 +1,4 @@
-public class ConvertTxt {
+public class ConvertTxt     {
     public String replacePunctuation(String txt){
         txt = txt.replaceAll("\\p{Punct}", " ");
         return txt;

@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import edu.stanford.nlp.ling.*;
 import edu.stanford.nlp.pipeline.*;
-import java.util.Properties;
+import java.util.*;
 import java.nio.file.*;
 
 public class Main {
     public static void main(String[] args) {
-
         /* this is my version bcoz i didnt see that prof gave code haha TAT
 
         Path folderPath = Paths.get("dataset");
@@ -57,14 +56,15 @@ public class Main {
     }
 
          */
-
+        ArrayList<String> listeDesDocsApresTraitement = new ArrayList<String>(); //each index are the formated txt of a file
+        ArrayList<String> listeTest2 = new ArrayList<String>(); //each index are the words
         try {
-            File folder = new File("dataset");
+            File folder = new File("src/dataset");
             File[] listOfFiles = folder.listFiles();
             for (File file : listOfFiles) {
                 if (file.isFile()) {
                     BufferedReader br = new BufferedReader(new FileReader(new
-                            File( "dataset" + "/" + file.getName())));
+                            File( "src/dataset" + "/" + file.getName())));
                     StringBuffer word = new StringBuffer();
                     String line;
                     while ((line = br.readLine()) != null) {
@@ -89,16 +89,29 @@ public class Main {
                             if (!(str.contains("'s") || str.contains("’s"))) {
                                 word.append(str).append(" ");
                             }
+                            listeTest2.add(str); //Here we can get each words individually
+                            //We should call WordMap here so that we can take each words separately
+                            //Not really sure where to call FileMaps
+                            //I think we should have a variable that has the position of the word in each iteration
+
                         }
                     }
                     String str = String.valueOf(word);
                     str = str.replaceAll("[^a-zA-Z0-9]", " ").replaceAll("\\s+", " ").trim();
 
+                    listeDesDocsApresTraitement.add(str);
 
                 }
             }
         } catch (IOException ioException){
             System.out.println("baka");}
+        //Tests to see where we can get each words individually and the formated texts
+        for(int i = 0; i < listeDesDocsApresTraitement.size(); i++){
+            System.out.println("IMPRIMER" + listeDesDocsApresTraitement.get(i) +"AAAAAAAAAAAAA");
+        }
+        for(int i = 0; i < listeTest2.size(); i++){
+            System.out.println("IMPRIMER2" + listeTest2.get(i) +"AAAAAAAAAAAAA2");
+        }
     }
 
 
@@ -110,6 +123,5 @@ public class Main {
     }
 
      */
-
 
 }
