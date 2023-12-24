@@ -1,8 +1,30 @@
-import java.util.Collection;
+import java.util.*;
 import java.util.Map;
-import java.util.Set;
 
-public class FileMaps implements Map {
+public class FileMaps /*implements Map*/ {
+    Map<ArrayList, ArrayList> map = new HashMap<>();
+    ArrayList<String> tabFileName = new ArrayList<>();
+    ArrayList<Integer> tabIndex = new ArrayList<>();
+    String fileName;
+    int index;
+
+    public FileMaps(/*String fileName, int index*/) {
+        /*
+        this.fileName = fileName;
+        this.index = index;
+        */
+    }
+
+    //We want to cumulate the data in lists, so each filename are in a list and each word position too
+     public ArrayList buildFileMap (String fileName, int index) {
+        //We want to put the strings in the lists, then map them
+        tabFileName.add(fileName);
+        tabIndex.add(index);
+        return map.put(tabFileName, tabIndex);
+     }
+
+
+    /*
     @Override
     public int size() {
         return 0;
@@ -62,4 +84,5 @@ public class FileMaps implements Map {
     public Set<Entry> entrySet() {
         return null;
     }
+     */
 }

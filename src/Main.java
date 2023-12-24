@@ -58,6 +58,9 @@ public class Main {
          */
         ArrayList<String> listeDesDocsApresTraitement = new ArrayList<String>(); //each index are the formated txt of a file
         ArrayList<String> listeTest2 = new ArrayList<String>(); //each index are the words
+
+        //We make the first instance of WordMaps
+        WordMap wm = new WordMap();
         try {
             File folder = new File("src/dataset");
             File[] listOfFiles = folder.listFiles();
@@ -65,6 +68,10 @@ public class Main {
                 if (file.isFile()) {
                     BufferedReader br = new BufferedReader(new FileReader(new
                             File( "src/dataset" + "/" + file.getName())));
+
+                    //Saving the file name
+                    String fileName = file.getName();
+
                     StringBuffer word = new StringBuffer();
                     String line;
                     while ((line = br.readLine()) != null) {
@@ -93,21 +100,43 @@ public class Main {
                             //We should call WordMap here so that we can take each words separately
                             //Not really sure where to call FileMaps
                             //I think we should have a variable that has the position of the word in each iteration
+                            //We call build with the word
+                            //wm.build(str, fileName);
 
                         }
                     }
                     String str = String.valueOf(word);
                     str = str.replaceAll("[^a-zA-Z0-9]", " ").replaceAll("\\s+", " ").trim();
 
+                    //Idk why but regex appeared
+                    //We make the list in wordmap
+                    // i should be the index of the word
+                    int i = 0;
+                    for (String mot : str.split(" ")) {
+                        //On veut le fileName, l'index et le mot
+                        i++;
+                        //If the word is not in the list, we make a new fileMap
+                        if (wm.containsKey(mot) == false) {
+                            FileMaps fm = new FileMaps();
+                            wm.put(mot, fm.buildFileMap(fileName, i));
+                        } else { //if the word is in the list, we check in the fileMap
+                            //System.out.println( wm.get(mot) ); //retourne null
+                        }
+                        //System.out.println( "Does wm containt the word : " + mot + " : " + wm.containsKey(mot) );
+
+                    }
+
                     listeDesDocsApresTraitement.add(str);
+                    System.out.println(fileName);
 
                 }
             }
         } catch (IOException ioException){
             System.out.println("baka");}
+
         //Tests to see where we can get each words individually and the formated texts
         for(int i = 0; i < listeDesDocsApresTraitement.size(); i++){
-            System.out.println("IMPRIMER" + listeDesDocsApresTraitement.get(i) +"AAAAAAAAAAAAA");
+            System.out.println("IMPRIMER " + listeDesDocsApresTraitement.get(i) +"AAAAAAAAAAAAA");
         }
         for(int i = 0; i < listeTest2.size(); i++){
             System.out.println("IMPRIMER2" + listeTest2.get(i) +"AAAAAAAAAAAAA2");
