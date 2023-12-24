@@ -7,10 +7,11 @@ public class Main {
         FileMap fileMap = new FileMap();
         WordMap wordMap = new WordMap();
 
-        fileMap.addOccurrences(nlp.docToNLP("dataset"));
+        fileMap.addOccurrences(nlp.docToNLP("src/dataset"));
+
 
         for (Map.Entry<List<String>, List<Integer>> entry : fileMap.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+            System.out.println("Print fm : " + entry.getKey() + ": " + entry.getValue());
         }
 
 
