@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class FileMap implements Map<List<String>, List<Integer>>{
-    private Map<List<String>, List<Integer>> countWords;
+public class FileMap implements Map<List<String>, ArrayList<ArrayList<Integer>>>{
+    private Map<List<String>, ArrayList<ArrayList<Integer>>> countWords;
     WordMap wordMap = new WordMap();
     NLP nlp = new NLP();
 
@@ -29,22 +29,22 @@ public class FileMap implements Map<List<String>, List<Integer>>{
     }
 
     @Override
-    public List<Integer> get(Object key) {
+    public ArrayList<ArrayList<Integer>> get(Object key) {
         return countWords.get(key);
     }
 
     @Override
-    public List<Integer> put(List<String> key, List<Integer> value) {
+    public ArrayList<ArrayList<Integer>> put(List<String> key, ArrayList<ArrayList<Integer>> value) {
         return countWords.put(key, value);
     }
 
     @Override
-    public List<Integer> remove(Object key) {
+    public ArrayList<ArrayList<Integer>> remove(Object key) {
         return countWords.remove(key);
     }
 
     @Override
-    public void putAll(Map<? extends List<String>, ? extends List<Integer>> m) {
+    public void putAll(Map<? extends List<String>, ? extends ArrayList<ArrayList<Integer>>> m) {
         countWords.putAll(m);
     }
 
@@ -59,12 +59,12 @@ public class FileMap implements Map<List<String>, List<Integer>>{
     }
 
     @Override
-    public Collection<List<Integer>> values() {
+    public Collection<ArrayList<ArrayList<Integer>>> values() {
         return countWords.values();
     }
 
     @Override
-    public Set<Entry<List<String>, List<Integer>>> entrySet() {
+    public Set<Entry<List<String>, ArrayList<ArrayList<Integer>>>> entrySet() {
         return countWords.entrySet();
     }
 
@@ -84,24 +84,26 @@ public class FileMap implements Map<List<String>, List<Integer>>{
         System.out.println(words.size());
 
 
-
         for (int k = 0; k < words.size(); k++) {
-            ArrayList<Integer> wordOccurrences = new ArrayList<>();
-            ArrayList<String> wordInWhichFile = new ArrayList<>();
-
+            ArrayList<ArrayList<Integer>> wordOccurrences = new ArrayList<>();
             for (int i = 0; i < arrayList.size(); i++) {
+                ArrayList<String> wordInWhichFile = new ArrayList<>();
                 for (int y = 0; y < arrayList.get(i).size(); y++) {
-                    String fileName = String.join("", arrayList.get(i).get(1));
+                    ArrayList<Integer> wordOccurrencesPerfile = new ArrayList<>();
                     String[] file = arrayList.get(i).get(y);
                     for (int j = 0; j < file.length; j++) {
                         if (words.get(k).equals(file[j])) {
-                            wordOccurrences.add(j);
-                            if (!wordInWhichFile.contains(fileName)) {
+                            wordOccurrencesPerfile.add(j);
+                            String fileName = arrayList.get(i).get(1)[0];
+                            if (wordInWhichFile.contains(fileName) == false) {
                                 wordInWhichFile.add(fileName);
                             }
                         }
                         countWords.put(wordInWhichFile, wordOccurrences);
                         wordMap.put(words.get(k), wordInWhichFile);
+                    }
+                    if (wordOccurrencesPerfile.isEmpty() == false){
+                        wordOccurrences.add(wordOccurrencesPerfile);
                     }
                 }
             }
