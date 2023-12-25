@@ -91,30 +91,25 @@ public class FileMap implements Map<List<String>, ArrayList<ArrayList<Integer>>>
                 for (int y = 0; y < arrayList.get(i).size(); y++) {
                     if (y % 2 == 0){
                         ArrayList<Integer> wordOccurrencesPerfile = new ArrayList<>();
-                    /*
+                    /* //TESTS to relocate fileName
                     if ( y == 0) {
-                        String fileName = String.join("", arrayList.get(i).get(y+1)); //fonctionne comme avant
+                        String fileName = String.join("", arrayList.get(i).get(y+1));
                     } else if ( (y+2) < arrayList.get(i).size() ) {
                         String fileName = String.join("", arrayList.get(i).get(y+2));
                     }
                      */
-
-
-                        //}
                         String[] file = arrayList.get(i).get(y);
-                        //if ( y + 1 < arrayList.get(i).size()) {
                         String fileName = String.join("", arrayList.get(i).get((y+1)));
-                        //}
-
+                        
                         System.out.println(" fileName " + fileName + i + (y+1));
                         for (String elem : file) {
                             System.out.println(elem + i + y);
                         }
-                        //int index =
-
+                        //TESTS
                         //for (String elem : file){
                         //    System.out.println("elem : " + elem + " de arraylist .get " + i + ".get " + y);
                         //}
+                        
                         for (int j = 0; j < file.length; j++) {
                             if (words.get(k).equals(file[j])) {
                                 wordOccurrencesPerfile.add(j);
@@ -135,6 +130,7 @@ public class FileMap implements Map<List<String>, ArrayList<ArrayList<Integer>>>
             }
         }
         System.out.println(countWords.size());
+        //Tests
         //Map<String, List<String>>
         //for (Map.Entry<String, List<String>> entry : wordMap.entrySet()) {
         //    System.out.println(entry.getKey() + ": " + entry.getValue());
