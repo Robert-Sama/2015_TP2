@@ -68,6 +68,7 @@ public class Main {
                     System.out.println(totalW + "length of specified file");
                     System.out.println(totalD + "total number of files");
                     /*
+                    //It didnt work, so we stoped at the calculations for TF, IDF, TFIDF
                     int TF = countw/totalW;
                     double IDF = 1 + Math.log( (1+totalD)/(1+countdw) );
                     double TFIDF = TF * IDF;
@@ -77,14 +78,6 @@ public class Main {
                      */
                     
                 }
-
-
-
-                //System.out.print(mot + fileMap.get(fmKey));
-                //for (Map.Entry<List<String>, ArrayList<ArrayList<Integer>>> entry2 : fileMap.entrySet()) {
-                //System.out.println(entry2.getKey() + ": " + entry2.getValue());
-                //On veut pour chaque entry1.getkey(), avoir la entry2.getkey et get value correspondante
-                //}
 
             } else {
                 System.out.println("zgeg");
