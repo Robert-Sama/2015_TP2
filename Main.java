@@ -14,49 +14,54 @@ public class Main {
 
         wordMap= fileMap.addOccurrences(nlp.docToNLP("src/dataset"));
 
-
+        /*
+        //Verify the contents of fileMap
         for (Map.Entry<List<String>, ArrayList<ArrayList<Integer>>> entry : fileMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        */
 
+        //We take the user input
         Scanner input = new Scanner(System.in);
         System.out.println("Enter string for TD method :");
         String userInput = input.nextLine();
         input.close();
 
-
-        //TEST wordMap
-        //For all the words, ...
-        //We want to take the word
-        //look at its txt files
-        //get the length of each txt files
-        //find the number of times the word is in each txt files
+        //Here we have the TFIDF functions
+        //We look through all the words in wordMap
         for (Map.Entry<String, List<String>> entry1 : wordMap.entrySet()) {
 
-            //System.out.println(entry1.getKey() + ": " + entry1.getValue());
+            //We register a variable mot as a key.
+            //We are looking for the user input by comparing it with the keys in wordMap
+            //In retrospect, we could've just looked by doing .containskey, but its too late now.
             String mot = entry1.getKey(); //we get the word
             if (userInput.equals(mot)) {
-                List<String> countdwL = entry1.getValue(); //We get the list of the files in which are the mots
-                for (String elem2 : countdwL){
-                    System.out.println(elem2);
+                //We get the list of the files in which are the words
+                List<String> countdwL = entry1.getValue(); 
 
-                }
-
-                ArrayList<ArrayList<Integer>> positionsOfMots = fileMap.get(entry1.getValue()); //We get the array of the positions of the words in the documents
-                //We find totalD
+                //We get the array of the positions of the words in the documents
+                ArrayList<ArrayList<Integer>> positionsOfMots = fileMap.get(countdwL); 
+                //We find totalD by looking at the dataset folder and getting its length
                 File folder = new File("src/dataset");
                 File[] listOfFiles = folder.listFiles();
                 int totalD = listOfFiles.length;
-
-                //For all the files of the word, we calculate TF, IDF, etc.
+                
+                //We go through all the files that contain the word that we are looking for
                 for (int i = 0; i < countdwL.size() ; i++){
+
+                    //We get the name of the file that we are currently in
                     String elem = countdwL.get(i);
                     String path = "src/dataset" + elem;
-                    //We get the length of each txt files
-                    int countdw = entry1.getValue().size();       //gets the number of files of the word
                     //int countdw = countdwL.size();
                     File ff = new File(path);
                     long totalW = ff.length();                  //gets the length of the specified file
+                    
+                    int countdw = countdwL.size();       //gets the number of files containing the word
+                                                        //countdwL is the list of the names of the files that contains the word
+                    //We want to get the number of times the word is in the specified file
+                    //positionsOfMots is the list containing the lists of the positions.
+                    //So when i = 0, we are in the first file, we want the number of positions in this file.
+                    // which corresponds to the first index of the sub list. So we want the size of the sub index of the first list.
                     int countw = positionsOfMots.get(i).size();  //gets all the number of times the word is in the file
                     System.out.println(countw + " times the word in specified file : " + elem);
                     System.out.println(countdw + "files in which there is the word");
@@ -70,15 +75,7 @@ public class Main {
                     System.out.println("TF(\"" + mot + "\") = " + TF);
                     System.out.println("IDF(\"" + mot + "\") = " + IDF);
                      */
-
-                    //TFd(w) = count(w)/totalW
-                    //count(w) = le nombre de fois où le mot w apparaît dans un document
-                    //totalW = totalW est le nombre total de mots dans le document (longueur en termes de mots)
-                    //IDF(w) = 1 + ln((1+totalD)/(1+count(d,w)))
-                    //TFIDFd(w) = TFd(w)⨉IDF(w)
-                    //Scored =σ𝑤∈𝑞𝑢𝑒𝑟𝑦 TFIDFd(w)
-
-
+                    
                 }
 
 
@@ -90,18 +87,10 @@ public class Main {
                 //}
 
             } else {
-                System.out.println("Input word not in any files");
+                System.out.println("zgeg");
 
             }
 
         }
-        //We now have wordMap and fileMap
-        //we want to look at
-
-
-
     }
 }
-//For the number of txt files that the word is in,
-//for (int i =0; i < fileMap.entrySet().getKey().size(); i ++ ) {
-//}
