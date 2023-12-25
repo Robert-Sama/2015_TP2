@@ -15,8 +15,7 @@ public class NLP {
 
     public ArrayList<ArrayList<String[]>> docToNLP(String dir){
         try {
-            ArrayList<String[]> arrayline = new ArrayList<>(); //Test to see if the same as before
-            //ArrayList<ArrayList<String[]>> txtlines = new ArrayList<>();
+            ArrayList<String[]> arrayline = new ArrayList<>();
 
             File folder = new File(dir);
             File[] listOfFiles = folder.listFiles();
@@ -58,9 +57,6 @@ public class NLP {
                     String[] fileName = new String[1];
                     fileName[0] = file.getName();
 
-                    //Test to see if the same as before
-                    //ArrayList<String[]> arrayline = new ArrayList<>();
-
                     arrayline.add(lines);
                     arrayline.add(fileName);
                     //txtlines.add(arrayline);
@@ -81,22 +77,9 @@ public class NLP {
                      */
                 }
             }
-            //Test to see if lie before
+            
             ArrayList<ArrayList<String[]>> txtlines = new ArrayList<>();
             txtlines.add(arrayline);
-/*
-            System.out.print("[ ");
-            for (ArrayList<String[]> list : txtlines) { // Parcours du premier ArrayList
-                System.out.print("[ ");
-                for (String[] array : list) { // Parcours du deuxième ArrayList
-                    System.out.print("{ ");
-                    for (String element : array) { // Parcours du tableau de chaînes
-                        System.out.print(element + " "); // Imprime l'élément suivi d'un espace
-                    } System.out.print(" }");
-                    //System.out.println(); // Nouvelle ligne après chaque tableau de chaînes
-                } System.out.print(" ]");
-            } System.out.print(" ]");
-*/
             return txtlines;
 
         } catch (IOException ioException){
